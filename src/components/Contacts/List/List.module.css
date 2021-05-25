@@ -1,0 +1,10 @@
+.list {
+    display: block;
+    width: 74%;
+    margin: auto;
+}
+.message {
+    display: flex;
+    justify-content: center;
+    color: brown;
+}
