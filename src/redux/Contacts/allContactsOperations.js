@@ -12,7 +12,8 @@ import {
     fetchContactError,
 } from './allContactsAction';
 
-axios.defaults.baseURL = `http://localhost:4040`;
+axios.defaults.baseURL =
+    'https://connections-api.herokuapp.com';
 
 const fetchContact = () => dispatch => {
     dispatch(fetchContactRequest());
@@ -21,13 +22,15 @@ const fetchContact = () => dispatch => {
         .then(({ data }) =>
             dispatch(fetchContactSuccess(data)),
         )
-        .catch(error => dispatch(fetchContactError(error)));
+        .catch(error =>
+            dispatch(fetchContactError(error.message)),
+        );
 };
 
-const addContact = e => dispatch => {
+const addContact = description => dispatch => {
     const contact = {
-        name: e.name,
-        number: e.number,
+        name: description.name,
+        number: description.number,
     };
 
     dispatch(addContactRequest());
@@ -37,17 +40,21 @@ const addContact = e => dispatch => {
         .then(({ data }) =>
             dispatch(addContactSuccess(data)),
         )
-        .catch(error => dispatch(addContactError(error)));
+        .catch(error =>
+            dispatch(addContactError(error.message)),
+        );
 };
 
-const deleteContact = id => dispatch => {
+const deleteContact = contactId => dispatch => {
     dispatch(deleteContactRequest());
 
     axios
-        .delete(`/contacts/${id}`)
-        .then(() => dispatch(deleteContactSuccess(id)))
+        .delete(`/contacts/${contactId}`)
+        .then(() =>
+            dispatch(deleteContactSuccess(contactId)),
+        )
         .catch(error =>
-            dispatch(deleteContactError(error)),
+            dispatch(deleteContactError(error.message)),
         );
 };
 

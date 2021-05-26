@@ -19,7 +19,6 @@ class LoginView extends Component {
         this.props.onLogin(this.state);
 
         this.setState({
-            name: '',
             email: '',
             password: '',
         });
@@ -39,8 +38,10 @@ class LoginView extends Component {
                     <label>
                         Email
                         <input
-                            type="email"
-                            name="name"
+                            type="text"
+                            name="email"
+                            required
+                            placeholder="Enter email"
                             value={email}
                             onChange={this.handleChange}
                             className={s.input}
@@ -50,8 +51,10 @@ class LoginView extends Component {
                     <label>
                         Password
                         <input
-                            type="password"
+                            type="text"
                             name="password"
+                            required
+                            placeholder="Enter password"
                             value={password}
                             onChange={this.handleChange}
                             className={s.input}
@@ -70,6 +73,6 @@ class LoginView extends Component {
 }
 
 const mapDispatchToProps = {
-    onLogin: authOperations.logIn,
+    onLogin: authOperations.login,
 };
 export default connect(null, mapDispatchToProps)(LoginView);

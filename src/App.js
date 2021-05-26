@@ -8,6 +8,7 @@ import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './index.css';
 import './App.css';
+import * as authOperations from './redux/auth/authOperations';
 
 const HomeView = lazy(() =>
     import(
@@ -33,6 +34,7 @@ const ContactsView = lazy(() =>
 class App extends Component {
     componentDidMount() {
         this.props.fetchContacts();
+        this.props.onGetCurrentUser();
     }
 
     render() {
@@ -88,6 +90,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     fetchContacts: () =>
         dispatch(contactsOperations.fetchContact()),
+    onGetCurrentUser: authOperations.getCurrentUser,
 });
 export default connect(
     mapStateToProps,
