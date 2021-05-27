@@ -1,7 +1,7 @@
 // const getIsAuthenticated = state =>
 //     state.auth.isAuthenticated;
 const getIsAuthenticated = state =>
-    Boolean(state.auth.token);
+    state.auth.isAuthenticated;
 
 const getUsername = state => state.auth.user.name;
 

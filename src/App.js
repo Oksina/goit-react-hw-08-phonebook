@@ -1,14 +1,14 @@
 import React, { Component, Suspense, lazy } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AppBar from './components/UserMenu/AppBar';
-import contactsOperations from './redux/Contacts/allContactsOperations';
-import { getLoading } from './redux/Contacts/allContactsSelector';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './index.css';
 import './App.css';
 import * as authOperations from './redux/auth/authOperations';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PublicRoute from './components/PublicRoute/PublicRoute';
 
 const HomeView = lazy(() =>
     import(
@@ -33,7 +33,6 @@ const ContactsView = lazy(() =>
 
 class App extends Component {
     componentDidMount() {
-        this.props.fetchContacts();
         this.props.onGetCurrentUser();
     }
 
@@ -55,24 +54,30 @@ class App extends Component {
                     }
                 >
                     <Switch>
-                        <Route
+                        <PublicRoute
                             exact
                             path="/"
+                            restricted
                             component={HomeView}
                         />
-                        <Route
+                        <PublicRoute
                             exact
                             path="/register"
+                            restricted
+                            redirectTo="/contacts"
                             component={RegisterView}
                         />
-                        <Route
+                        <PublicRoute
                             exact
                             path="/login"
+                            restricted
+                            redirectTo="/contacts"
                             component={LoginView}
                         />
-                        <Route
+                        <PrivateRoute
                             exact
                             path="/contacts"
+                            redirectTo="/login"
                             component={ContactsView}
                         />
                     </Switch>
@@ -82,17 +87,7 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        isLoadingContacts: getLoading(state),
-    };
-};
-const mapDispatchToProps = dispatch => ({
-    fetchContacts: () =>
-        dispatch(contactsOperations.fetchContact()),
+const mapDispatchToProps = () => ({
     onGetCurrentUser: authOperations.getCurrentUser,
 });
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(App);
+export default connect(null, mapDispatchToProps)(App);

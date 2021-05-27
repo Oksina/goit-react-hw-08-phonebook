@@ -36,8 +36,12 @@ export const register = credentials => async dispatch => {
         );
 
         token.set(response.data.token);
+
         dispatch(registerSuccess(response.data));
     } catch (error) {
+        alert(
+            'You entered incorrect data. Check your name, login and password',
+        );
         dispatch(registerError(error.message));
     }
 };
@@ -54,6 +58,9 @@ export const login = credentials => async dispatch => {
         token.set(response.data.token);
         dispatch(loginSuccess(response.data));
     } catch (error) {
+        alert(
+            'You entered incorrect data, check your login and password',
+        );
         dispatch(loginError(error.message));
     }
 };
@@ -65,6 +72,7 @@ export const logOut = () => async dispatch => {
         await axios.post('/users/logout');
 
         token.unset();
+
         dispatch(logoutSuccess());
     } catch (error) {
         dispatch(logoutError(error.message));
