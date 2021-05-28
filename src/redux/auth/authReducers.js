@@ -9,6 +9,7 @@ import {
     logoutError,
     getCurrentUserSuccess,
     getCurrentUserError,
+    getCurrentUserRequest,
 } from './authActions';
 
 const initialUserState = { name: '', email: '' };
@@ -39,9 +40,10 @@ const isAuthenticated = createReducer(false, {
     [registerSuccess]: () => true,
     [loginSuccess]: () => true,
     [getCurrentUserSuccess]: () => true,
+    [getCurrentUserRequest]: () => true,
     [registerError]: () => false,
     [loginError]: () => false,
-    [logoutError]: () => false,
+    //[logoutError]: () => false,
     [getCurrentUserError]: () => false,
     [logoutSuccess]: () => false,
 });

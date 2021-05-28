@@ -57,7 +57,7 @@ class App extends Component {
                         <PublicRoute
                             exact
                             path="/"
-                            restricted
+                            // restricted
                             component={HomeView}
                         />
                         <PublicRoute

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import authSelectors from '../../redux/auth/authSelectors';
 
 const AuthNav = ({ isAuthenticated }) => (
-    <div>
+    <nav>
         <NavLink to="/" exact>
             Home
         </NavLink>
@@ -13,7 +13,7 @@ const AuthNav = ({ isAuthenticated }) => (
                 Contacts
             </NavLink>
         )}
-    </div>
+    </nav>
 );
 
 const mapStateToProps = state => ({

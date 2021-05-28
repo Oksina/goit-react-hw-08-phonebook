@@ -12,8 +12,8 @@ import {
     fetchContactError,
 } from './allContactsAction';
 
-axios.defaults.baseURL =
-    'https://connections-api.herokuapp.com';
+// axios.defaults.baseURL =
+//     'https://connections-api.herokuapp.com';
 
 const fetchContact = () => dispatch => {
     dispatch(fetchContactRequest());

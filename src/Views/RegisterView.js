@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authOperations from '../redux/auth/authOperations';
+import PropTypes from 'prop-types';
 import s from '../components/Contacts/Form/Form.module.css';
 
 class RegisterView extends Component {
@@ -17,6 +18,15 @@ class RegisterView extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
+        if (
+            !this.state.name ||
+            !this.state.email ||
+            !this.state.password
+        ) {
+            alert('Fill the Registration form');
+            return;
+        }
+
         this.props.onRegister(this.state);
 
         this.setState({
@@ -30,7 +40,7 @@ class RegisterView extends Component {
         const { name, email, password } = this.state;
         return (
             <div>
-                <h1> Register Page</h1>
+                <h1> Registration Page</h1>
 
                 <form
                     onSubmit={this.handleSubmit}
@@ -85,6 +95,10 @@ class RegisterView extends Component {
         );
     }
 }
+
+RegisterView.propTypes = {
+    onRegister: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = {
     onRegister: authOperations.register,

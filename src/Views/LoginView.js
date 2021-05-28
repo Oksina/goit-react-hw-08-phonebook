@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authOperations from '../redux/auth/authOperations';
+import PropTypes from 'prop-types';
 import s from '../components/Contacts/Form/Form.module.css';
 
 class LoginView extends Component {
@@ -15,6 +16,11 @@ class LoginView extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
+
+        if (!this.state.email || !this.state.password) {
+            alert('Fill the Login form');
+            return;
+        }
 
         this.props.onLogin(this.state);
 
@@ -71,6 +77,10 @@ class LoginView extends Component {
         );
     }
 }
+
+LoginView.propTypes = {
+    onLogin: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = {
     onLogin: authOperations.login,

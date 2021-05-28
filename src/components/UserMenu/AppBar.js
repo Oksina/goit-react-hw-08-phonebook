@@ -4,6 +4,7 @@ import AuthNav from './AuthNav';
 import Navigation from './Navigation';
 import UserMenu from './UserMenu';
 import authSelectors from '../../redux/auth/authSelectors';
+import PropTypes from 'prop-types';
 
 const AppBar = ({ isAuthenticated }) => (
     <header>
@@ -17,6 +18,10 @@ const AppBar = ({ isAuthenticated }) => (
         </div>
     </header>
 );
+
+AppBar.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = state => ({
     isAuthenticated:

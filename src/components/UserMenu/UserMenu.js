@@ -4,6 +4,7 @@ import authSelectors from '../../redux/auth/authSelectors';
 import * as authOperations from '../../redux/auth/authOperations';
 import defaultAvatar from './defaultAvatar.jpg';
 import s from '../Contacts/Form/Form.module.css';
+import PropTypes from 'prop-types';
 
 const UserMenu = ({ avatar, name, onLogout }) => (
     <div>
@@ -18,6 +19,12 @@ const UserMenu = ({ avatar, name, onLogout }) => (
         </button>
     </div>
 );
+
+UserMenu.propTypes = {
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+    onLogout: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
     name: authSelectors.getUsername(state),

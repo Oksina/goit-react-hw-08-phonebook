@@ -1,5 +1,3 @@
-// const getIsAuthenticated = state =>
-//     state.auth.isAuthenticated;
 const getIsAuthenticated = state =>
     state.auth.isAuthenticated;
 
